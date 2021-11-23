@@ -31,6 +31,7 @@ public class Main {
             if (ticketsAvailable[ticket] == -1) {
                 System.out.println(". . .");
             }else {
+                ticketsAvailable[ticket] = -1;
                 ticketHoldersNames[ticket] = name;
                 ticketHoldersTickets[ticket] = ticket;
                 ticketGot = true;
@@ -40,7 +41,40 @@ public class Main {
 
     public static void checkTicket() {
         String name = getInput("what is your first name?");
-
+        boolean validTicket = false;
+        boolean nameFound = false;
+        int nameAt = -1;
+        while (validTicket == false) {
+            for (int i = 0; i < 100; i++) {
+                if (ticketHoldersNames[i].equals(name)) {
+                    nameFound = true;
+                    nameAt = i;
+                    break;
+                }
+            }
+            if (nameFound == false) {
+                break;
+            }
+            String ticketStr = getInput("what is your first name?");
+            int ticket = Integer.parseInt(ticketStr);
+            if (ticketHoldersTickets[nameAt] == ticket) {
+                boolean winCheck = false;
+                int primes[] = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+                for (int i = 0; i < 25; i++) {
+                    if (primes[i] == ticket) {
+                        winCheck = true;
+                    }
+                    if (winCheck == true) {
+                        System.out.println("you win a prize!");
+                    }else {
+                        System.out.println("not a winning ticket this time");
+                    }
+                }
+                validTicket = true;
+            }else {
+                System.out.println("that is not your ticket");
+            }
+        }
     }
 
 
