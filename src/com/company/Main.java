@@ -34,6 +34,7 @@ public class Main {
                 ticketsAvailable[ticket] = -1;
                 ticketHoldersNames[ticket] = name;
                 ticketHoldersTickets[ticket] = ticket;
+                System.out.println("your ticket is number " + ticket);
                 ticketGot = true;
             }
         }
@@ -56,6 +57,7 @@ public class Main {
                 break;
             }
             String ticketStr = getInput("what is your first name?");
+
             int ticket = Integer.parseInt(ticketStr);
             if (ticketHoldersTickets[nameAt] == ticket) {
                 boolean winCheck = false;
@@ -84,13 +86,15 @@ public class Main {
         String answer = "";
         try {
             while (true) {
-                answer = getInput("would you like to enter a ticket number or get a ticket? (type 'enter' or 'get'");
+                answer = getInput("would you like to check a ticket number or get a ticket? (type 'check' or 'get')");
                 switch (answer) {
-                    case "enter":
-                        System.out.println("-entering ticket-");
+                    case "check":
+                        System.out.println("-checking ticket-");
+                        checkTicket();
                         break;
                     case "get":
                         System.out.println("-getting ticket-");
+                        getTicket();
                         break;
                     default:
                         System.out.println("enter get or enter");
@@ -101,28 +105,25 @@ public class Main {
             System.out.println("incorrect input");
             System.out.println(e);
         }
-        if (answer.equals("get")) {
-            getTicket();
-        }
-        if (answer.equals("enter")) {
-            checkTicket();
-        }
     }
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
             ticketsAvailable[i] = i;
+            ticketHoldersTickets[i] = -1;
+            ticketHoldersNames[i] = "";
         }
         boolean run = true;
         while (run == true) {
-            String again = getInput("would you like to enter/get another ticket");
+            String again = getInput("would you like to enter/get another ticket (type 'yes' or 'no')");
             if (again.equals("yes")) {
                 menu();
             }
-            if (again.equals("yes")) {
+            if (again.equals("no")) {
                 run = false;
             }
-        }}
+        }
+    }
 
 
 
